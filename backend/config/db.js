@@ -1,7 +1,8 @@
 const sqlite3 = require('sqlite3').verbose();
+let db;
 
 const connectDB = () => {
-    const db = new sqlite3.Database('./database.db', (err) => {
+    db = new sqlite3.Database('./database.db', (err) => {
         if (err) {
             console.error('Error connecting to database:', err.message);
             process.exit(1);
@@ -10,4 +11,19 @@ const connectDB = () => {
     });
 };
 
-module.exports = connectDB;
+const closeDB = () => {
+    db.close((err) => {
+        if (err) {
+            console.error('Error closing database connection:', err.message);
+        } else {
+            console.log('Database connection closed.');
+        }
+    });
+};
+
+process.on('SIGINT', () => {
+    closeDB();
+    process.exit(0);
+});
+
+module.exports = { connectDB, closeDB };
