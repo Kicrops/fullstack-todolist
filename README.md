@@ -1,7 +1,6 @@
 # Fullstack To-Do List
 
-This is my attempt at doing a basic fullstack todolist
-
+This is my attempt at doing a basic full-stack todo list
 
 ## Technologies Used
 
